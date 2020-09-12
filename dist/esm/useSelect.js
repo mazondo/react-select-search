@@ -11,7 +11,7 @@ import flattenOptions from './lib/flattenOptions';
 import groupOptions from './lib/groupOptions';
 import getNewValue from './lib/getNewValue';
 import getOption from './lib/getOption';
-import doSearch from './search';
+import internalSearch from './search';
 export default function useSelect({
   value: defaultValue = null,
   disabled = false,
@@ -23,7 +23,8 @@ export default function useSelect({
   getOptions = null,
   allowEmpty = true,
   closeOnSelect = true,
-  closable = true
+  closable = true,
+  doSearch = internalSearch
 }) {
   const ref = useRef(null);
   const flatDefaultOptions = useMemo(() => flattenOptions(defaultOptions), [defaultOptions]);

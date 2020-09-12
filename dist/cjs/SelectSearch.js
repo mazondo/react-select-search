@@ -15,6 +15,8 @@ var _Option = _interopRequireDefault(require("./Components/Option"));
 
 var _isSelected = _interopRequireDefault(require("./lib/isSelected"));
 
+var _search = _interopRequireDefault(require("./search"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -29,7 +31,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var SelectSearch = (0, _react.forwardRef)(function (_ref, ref) {
+var SelectSearch = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
   var defaultValue = _ref.value,
       disabled = _ref.disabled,
       placeholder = _ref.placeholder,
@@ -46,7 +48,8 @@ var SelectSearch = (0, _react.forwardRef)(function (_ref, ref) {
       renderOption = _ref.renderOption,
       renderGroupHeader = _ref.renderGroupHeader,
       getOptions = _ref.getOptions,
-      fuse = _ref.fuse;
+      fuse = _ref.fuse,
+      doSearch = _ref.doSearch;
   var selectRef = (0, _react.useRef)(null);
 
   var _useSelect = (0, _useSelect2["default"])({
@@ -60,7 +63,8 @@ var SelectSearch = (0, _react.forwardRef)(function (_ref, ref) {
     getOptions: getOptions,
     closeOnSelect: closeOnSelect,
     closable: !multiple || printOptions === 'on-focus',
-    allowEmpty: !!placeholder
+    allowEmpty: !!placeholder,
+    doSearch: doSearch
   }),
       snapshot = _useSelect[0],
       valueProps = _useSelect[1],
@@ -209,7 +213,8 @@ SelectSearch.defaultProps = {
     keys: ['name', 'groupName'],
     threshold: 0.3
   },
-  getOptions: null
+  getOptions: null,
+  doSearch: _search["default"]
 };
 SelectSearch.propTypes = process.env.NODE_ENV !== "production" ? {
   options: _propTypes["default"].arrayOf(_types.optionType).isRequired,
@@ -228,12 +233,13 @@ SelectSearch.propTypes = process.env.NODE_ENV !== "production" ? {
   renderOption: _propTypes["default"].func,
   renderGroupHeader: _propTypes["default"].func,
   renderValue: _propTypes["default"].func,
+  doSearch: _propTypes["default"].func,
   fuse: _propTypes["default"].oneOfType([_propTypes["default"].bool, _propTypes["default"].shape({
     keys: _propTypes["default"].arrayOf(_propTypes["default"].string),
     threshold: _propTypes["default"].number
   })])
 } : {};
 
-var _default = (0, _react.memo)(SelectSearch);
+var _default = /*#__PURE__*/(0, _react.memo)(SelectSearch);
 
 exports["default"] = _default;

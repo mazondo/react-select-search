@@ -48,7 +48,9 @@ function useSelect(_ref) {
       _ref$closeOnSelect = _ref.closeOnSelect,
       closeOnSelect = _ref$closeOnSelect === void 0 ? true : _ref$closeOnSelect,
       _ref$closable = _ref.closable,
-      closable = _ref$closable === void 0 ? true : _ref$closable;
+      closable = _ref$closable === void 0 ? true : _ref$closable,
+      _ref$doSearch = _ref.doSearch,
+      doSearch = _ref$doSearch === void 0 ? _search["default"] : _ref$doSearch;
   var ref = (0, _react.useRef)(null);
   var flatDefaultOptions = (0, _react.useMemo)(function () {
     return (0, _flattenOptions["default"])(defaultOptions);
@@ -203,7 +205,7 @@ function useSelect(_ref) {
       var newOptions = foundOptions;
 
       if (inputVal.length) {
-        newOptions = (0, _search["default"])(inputVal, foundOptions, fuse);
+        newOptions = doSearch(inputVal, foundOptions, fuse);
       }
 
       setState(function (oldState) {

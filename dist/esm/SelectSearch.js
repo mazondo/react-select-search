@@ -12,7 +12,8 @@ import useSelect from './useSelect';
 import { optionType } from './types';
 import Option from './Components/Option';
 import isSelected from './lib/isSelected';
-const SelectSearch = forwardRef(({
+import internalSearch from './search';
+const SelectSearch = /*#__PURE__*/forwardRef(({
   value: defaultValue,
   disabled,
   placeholder,
@@ -29,7 +30,8 @@ const SelectSearch = forwardRef(({
   renderOption,
   renderGroupHeader,
   getOptions,
-  fuse
+  fuse,
+  doSearch
 }, ref) => {
   const selectRef = useRef(null);
   const [snapshot, valueProps, optionProps] = useSelect({
@@ -43,7 +45,8 @@ const SelectSearch = forwardRef(({
     getOptions,
     closeOnSelect,
     closable: !multiple || printOptions === 'on-focus',
-    allowEmpty: !!placeholder
+    allowEmpty: !!placeholder,
+    doSearch
   });
   const {
     focus,
@@ -181,7 +184,8 @@ SelectSearch.defaultProps = {
     keys: ['name', 'groupName'],
     threshold: 0.3
   },
-  getOptions: null
+  getOptions: null,
+  doSearch: internalSearch
 };
 SelectSearch.propTypes = process.env.NODE_ENV !== "production" ? {
   options: PropTypes.arrayOf(optionType).isRequired,
@@ -200,9 +204,10 @@ SelectSearch.propTypes = process.env.NODE_ENV !== "production" ? {
   renderOption: PropTypes.func,
   renderGroupHeader: PropTypes.func,
   renderValue: PropTypes.func,
+  doSearch: PropTypes.func,
   fuse: PropTypes.oneOfType([PropTypes.bool, PropTypes.shape({
     keys: PropTypes.arrayOf(PropTypes.string),
     threshold: PropTypes.number
   })])
 } : {};
-export default memo(SelectSearch);
+export default /*#__PURE__*/memo(SelectSearch);

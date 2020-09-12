@@ -10,6 +10,8 @@ import useSelect from './useSelect';
 import { optionType } from './types';
 import Option from './Components/Option';
 import isSelected from './lib/isSelected';
+import internalSearch from './search';
+
 
 const SelectSearch = forwardRef(({
     value: defaultValue,
@@ -29,6 +31,7 @@ const SelectSearch = forwardRef(({
     renderGroupHeader,
     getOptions,
     fuse,
+    doSearch,
 }, ref) => {
     const selectRef = useRef(null);
     const [snapshot, valueProps, optionProps] = useSelect({
@@ -43,6 +46,7 @@ const SelectSearch = forwardRef(({
         closeOnSelect,
         closable: !multiple || printOptions === 'on-focus',
         allowEmpty: !!placeholder,
+        doSearch,
     });
 
     const {
@@ -201,6 +205,7 @@ SelectSearch.defaultProps = {
         threshold: 0.3,
     },
     getOptions: null,
+    doSearch: internalSearch,
 };
 
 SelectSearch.propTypes = {
@@ -230,6 +235,7 @@ SelectSearch.propTypes = {
     renderOption: PropTypes.func,
     renderGroupHeader: PropTypes.func,
     renderValue: PropTypes.func,
+    doSearch: PropTypes.func,
     fuse: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.shape({
