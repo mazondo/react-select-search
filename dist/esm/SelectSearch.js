@@ -13,7 +13,7 @@ import { optionType } from './types';
 import Option from './Components/Option';
 import isSelected from './lib/isSelected';
 import internalSearch from './search';
-const SelectSearch = /*#__PURE__*/forwardRef(({
+const SelectSearch = forwardRef(({
   value: defaultValue,
   disabled,
   placeholder,
@@ -210,4 +210,4 @@ SelectSearch.propTypes = process.env.NODE_ENV !== "production" ? {
     threshold: PropTypes.number
   })])
 } : {};
-export default /*#__PURE__*/memo(SelectSearch);
+export default memo(SelectSearch);

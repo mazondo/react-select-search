@@ -59,4 +59,4 @@ Option.propTypes = process.env.NODE_ENV !== "production" ? {
   cls: PropTypes.func.isRequired,
   renderOption: PropTypes.func.isRequired
 } : {};
-export default /*#__PURE__*/memo(Option);
+export default memo(Option);
